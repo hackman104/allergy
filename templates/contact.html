@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1>Contact me</h1>
+        <p>
+            I hope you've found this website useful. If you have any questions or concerns, would like to see a feature added to the
+            website, or would like me to remove one of the allergy lists I have posted, use this form to contact me. Please provide
+            a valid email address so that I can respond if I have follow-up questions.
+        </p>
+        {% if success %}
+        <p class="success">Thank you for your message! I'll get back to you as quickly as I can.</p>
+        {% endif %}
+        <form id="cont" method="post">
+            <div class="form-group">
+                <input class="form-control" type="email" name="address" autofocus required placeholder="Email address">
+                <br>
+                <textarea class="form-control" form="cont" required autocomplete="off" name="message" rows="4" placeholder="Enter message here"></textarea>
+                <br>
+                <input class="btn btn-primary" type="submit" value="Submit Message">
+            </div>
+        </form>
+    </div>
+{% endblock %}

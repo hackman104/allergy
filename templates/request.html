@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Request
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1>Submit a request</h1>
+        <p>
+            Here you may request that I add another restaurant's allergy information to this website. I ask that you please look for it
+            first on the "search" page to ensure that I haven't already uploaded it. In addition, if you already know the link to the website,
+            I ask that you send that in the provided box as well (though this is not required). Thank you for helping to build this
+            project!
+        </p>
+        {% if success %}
+        <p class="success">Thank you for your request!</p>
+        {% endif %}
+        <form id="request" type="form-group" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" autofocus name="rest" autocomplete="off" placeholder="Enter restaurant name">
+                <br>
+                <input class="form-control" type="url" name="rest_link" autocomplete="off" placeholder="Enter link here (optional)">
+                <br>
+                <input class="btn btn-primary" type="submit" value="Submit Request">
+            </div>
+        </form>
+    </div>
+{% endblock %}

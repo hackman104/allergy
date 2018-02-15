@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1>Search</h1>
+        <p>
+            You have two options for looking up allergen documentation: you may either select a restaurant from the drop-down
+            list, or you may use the search box below.
+        </p>
+        <p class="warning">
+            * This site opens allergen guides in a new window. Your browser or ad blocker may stop this behavior by default. Please
+            allow pop-ups to enable full functionality.
+        </p>
+        <br>
+        <form id="dd">
+            <select class="form-control" name="restaurant" id="rstrnt" onchange="openLink(this.value);">
+                <option value="">Select a restaurant:</option>
+                {% for rest in rests %}
+                    <option value="{{rest[1]}}">{{rest[0]}}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <br>
+        <form id="form">
+            <div class="form-group">
+                <label for="q">Enter restaurant yourself:&nbsp;</label>
+                <br>
+                <input type="text" class="form-control" id="q" autofocus autocomplete="off" placeholder="Type restaurant name">
+            </div>
+        </form>
+    </div>
+{% endblock %}
