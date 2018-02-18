@@ -3,10 +3,35 @@ function openLink(link)
     if (link == "")
         return false;
 
-    window.open(link, '_blank');
+    var popup = window.open(link, '_blank');
+	popupBlockerChecker.check(popup);
     return false;
 }
 
+var popupBlockerChecker = {
+	check: function(popup_window){
+		var _scope = this;
+		if (popup_window) {
+			if(/chrome/.test(navigator.userAgent.toLowerCase())){
+				setTimeout(function () {
+					_scope._is_popup_blocked(_scope, popup_window);
+				},200);
+			}else{
+				popup_window.onload = function (){
+					_scope._is_popup_blocked(_scope, popup_window);
+				};
+			}
+		}else{
+			_scope._displayError();
+		}
+	},
+	_is_popup_blocked: function(scope, popup_window){
+		if ((popup_window.innerHeight > 0)== false){ scope._displayError(); }
+	},
+	_displayError: function(){
+		alert("Popup blocker is enabled! Please add this site to your exception list to enable full functionality.");
+	}
+};
 
 function search(query, syncResults, asyncResults)
 {
@@ -46,7 +71,8 @@ $(document).ready(function() {
     $("#q").on("typeahead:selected", function(eventObject, suggestion, name) {
 
         // Open document user selects from typeahead
-        window.open(suggestion.link, '_blank');
+        var popup2 = window.open(suggestion.link, '_blank');
+		popupBlockerChecker.check(popup);
     });
 
 
